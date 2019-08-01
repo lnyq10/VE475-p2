@@ -66,7 +66,44 @@ Date: 26 July 2019
 \newpage
 \tableofcontents
 \newpage
+\section{Transaction}
 
+\subsection{Composition of A Transaction}
+One first thing of which Bitcoin currency is very different from common cash is that what you receive will not add up or mix up together. The Bitcoin system is like a public account book, it writes:
+\begin{quote}
+Bob pays Alice 2 BTC \\
+Alice pays you 1 BTC\\
+You pay Bob 0.5 BTC\\
+$\cdots$
+\end{quote}
+how much bitcoin you have is not a total number, but all the payments that you receive from others according to your address, or say your public key. The payments are independent and will not mix up, and whenever you spend bitcoin, the amount you pay others is just from the previous payments you received previously. 
+
+Of course, a real transaction in Bitcoin system is no as simple as a sentence saying who pays whom how much. A transaction is mainly composed of the following parts:
+\begin{itemize}
+	\item Input refers to which output (or outputs) does the currency that you want to send comes from.
+	\item The output is the amount sent to the bitcoin address (via standard transactions) and a set of rules for unlocking the output amount. In Bitcoin terms, the output is called "unspent transaction output" or UTXO. Any bitcoin amount we receive is locked at the receiving address.
+	\item Metadata, including transaction ID, transaction format version, number of input amounts, number of output amounts, lock time, and size of transaction (in bytes).
+\end{itemize}
+
+A transaction can have multiple inputs or outputs. For multiple outputs, we take the example at the beginning, and assume that you just enter the Bitcoin world, so all you received is from Alice's payment to you, and you want to pay Bob 0.5BTC. As mentioned before, bitcoin is not like cash in the wallet, you are not deducting 0.5BTC from 1BTC that you have, but dividing the 1BTC to two separate outputs: one is 0.5BTC to Bob, the other is the rest of the bitcoins, say your "change". The output back to you could be less than 0.5BTC, with some of it sparing to a "transaction fee", which will be discussed in Section \ref{subsec:trans_fee}. Multiple inputs are even easier to think of: if you are paying Bob 0.5BTC, you can use two outputs from previous confirmed transactions to your address, like "Alice pays you 0.1BTC" and "John pays you 0.4BTC", or "Alice pays you 0.3BTC" and "John pays you 0.3BTC", in this way you'll have two inputs and two outputs.
+
+\subsection{Verify the Transaction} 
+If you intend to transfer some bitcoin, you will want to inform all the nodes in the Bitcoin network to let them verify or authenticate the transaction. The verification includes:
+\begin{itemize}
+	\item ensuring that you have enough bitcoin to complete the transaction.
+	\item ensuring that you did not use bitcoin that will be transferred in transactions with others.
+	\item checking the public key and digital signature
+\end{itemize}
+Once a transaction is verified, the information of this transaction will be added to a block, and the block can be connected to a blockchain. If one wants to tamper with a transaction, all the blocks in the blockchain need changing, and this is basically impossible (details will be discussed in Section xx).
+
+\subsection{Adding Transaction to Block} 
+In the procedure of adding a transaction to block, there are three hashes involved. First is the hash of the transaction itself. As mentioned above, a transaction may contain multiple inputs and outputs. By arranging these inputs and outputs and hashing them, a unique hash value of a transaction can be obtained. 
+Second is the Merkle hash root of all transactions in the current block. 
+The third one is the block hash, when hashing the whole block, the Merkle hash root is used as a parameter, so that the information of all transactions is reflected in the hash of a block.
+\subsection{Package Transaction Record} 
+\subsection{Broadcast the Transaction} 
+\subsection{Transaction Fees}
+\label{subsec:trans_fee}
 \section{Mining}
 \subsection{Definition of Mining}
 The bitcoin is a decentralized cryptocurrent. No authorities are present to authenticate each transaction. Thus the burden of verifying transactions and gathering valid transactions lies to the miners. The ultimate goal of a miner is to constitute a block by solving a mathematical problem, which will be described in the next section. To compensate the computational power spent by the miner, some bitcoins are given to the first miner that create a new block. Also, the payer in a transaction may specify a transaction fee that will be given to the miner. 
