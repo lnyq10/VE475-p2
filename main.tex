@@ -66,6 +66,74 @@ Date: 26 July 2019
 \newpage
 \tableofcontents
 \newpage
+\section{Introduction}
+\subsection{Traditional Coins and Banks}
+
+Long time ago, in a trading system, participants would exchange their goods or services without medium of change. It is not efficient because it is hard to find a pair participant who exactly has the corresponding desire. Then, people start to use precious metal as medium of change due to its stability and rarity. Later, currency is invented to work as medium of change, which contributes to the foundation of a modern society. Trade becomes easier with currency. In current society, electric trade start to grow rapidly, in which people can merchandise goods and services not using currency but money stored in banks or online payments such as Alipay. 
+
+This electric trade is innovative when it enables long-distance and quick trade globally. However, this kind of currency still requires credit endorsement from countries and banks. If Alice transfers her money to a bank, then the bank first verifies that the money are of authority, and provides Alice some promise that she can take away her money or directly transfer the money to others. Bob who is going to accept money from Alice, would get the transferred amount from the bank about the amount he get. In this simple transition procedure, bank plays an important role as a middleman as well as provide credit endorsement for both sides.
+
+There are problems in this common trade scheme.
+\begin{enumerate}
+    \item [$\bullet$] The cost is high. Bank would ask both sides in the trade for handling fee as income of the bank.
+    \item [$\bullet$] It is slow. The service requires time to check user's information and complete the procedures.
+    \item [$\bullet$] It is not anonymous. 
+    \item [$\bullet$]  Trade between countries and areas are harder to complete. This involves problems of exchange rate.
+\end{enumerate}
+
+\subsection{Creation of Bitcoins}
+
+In 2008, Satoshi Nakamoto published a paper "Bitcoin: A Peer-to-Peer Electronic Cash System", putting forward a kind of electronic cash system constructed on the basis of cryptography. Instread of traditional credit endorsement of countries and banks, Satoshi uses cryptography as the basis of cash system. Satoshi states that "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."[] In his design, people can trade with others with bitcoins peer to peer with no third parties, and the safety is still ensured. This is a cash system with no extra cost, perfect speed, anonymity and totally no threshold.  
+
+Especially in the society with giant number of commerce on the Internet, financial institutes as third parties are essential to deal with electronic payments. This commerce model depends on trust and costs a number of transaction cost. Satoshi proposes "a solution to the double-spending problem using a peer-to-peer distributed timestamp server to generate computational proof of the chronological order of transactions."[] The system is computationally secure because only when the attacker node can control more CPU power than all the other users collectively worldwide. It is impossible in cryptography.
+
+The number of bitcoins is limited so as not to reduce their value. A user can mine bitcoins by running the program. The complexity is very high and the number of bitcoins mined in a period of time is certain. When user mine the solution, all the other users can get to know. It is hard to find, but easy to verify. The number of bitcoins remaining to be mined is reducing. In total, there are no more than 21 million bitcoins. []
+
+\section{Fundamentals in Cryptography}
+
+As is illustrated before, bitcoins are constructed on the foundation of Cryptography. In this section, some basic cryptography concepts and working principles are explained.
+
+\subsection{Hash Functions}
+
+A hash function is used to map an arbitrary-length data into a data of fixed length. It also verifies the properties:
+\begin{enumerate}
+    \item [$\bullet$] The hashing result is efficiently computed for any input.
+    \item [$\bullet$] It is computationally infeasible to discover two values $x$ and $x'$ such that $x \neq x'$ and $h(x) = h(x')$. This property is called "Collision Resistant".
+\end{enumerate}
+
+The properties of hash function can protect the original information, prevent information being tampered, verify authentication and etc. It is a general concept while various hash functions have wide applications in cryptography as well as in the world of bitcoins.
+
+\subsection{Merkle Tree}
+
+Merkle tree is a special form of hash function, which has wide applications in peer-to-peer transition. Merkle tree allows efficient and secure verification for data of large size. In a merkle tree, every leaf node is hash result of a block of information. The leaves of a merkle tree are the hash results of the blocks of the original data. Then, hashing goes upwards. Nodes in a merkle tree are the hashing result of its respective children. This procedure continues until the root of merkle tree is obtained. Usually, a merkle tree is a binary tree. 
+
+In a peer-to-peer network, Merkle Tree is used to make sure that data blocks received are not corrupted or replaced with great efficiency.
+
+\subsection{Digital Signature}
+
+Digital signature typically composes of three parts:
+\begin{enumerate}
+    \item [$\bullet$] Key generation. 
+    
+    Select the private key randomly.
+    
+    \item [$\bullet$] Signing.
+    
+    A signature is produce by assigning a message with the private key.
+    
+    \item [$\bullet$] Verifying. 
+    
+    Verify whether there is authentication with signature, public key and message.
+    
+\end{enumerate}
+
+There two important properties of digital signature: (1) the authenticity of a digital signature can be verifies with the corresponding public key; (2) is is computationally infeasible to generate a signature which can be verified by the public key without knowing the corresponding private key.
+
+
+
+\subsection{SHA-256 Signature}
+
+SHA is the simplified form of "Secure Hash Algorithm". SHA-2 is a set of cryptographic hash functions design with Merkle–Damgård structure. SHA-256 is one hash function in SHA-2. These functions share similar structure. SHA-256 computes with 32-bit words. It has great performance on security and efficiency.
 \section{Transaction}
 \subsection{Overview}
 One important thing of which Bitcoin currency is very different from common cash is that, what you receive will not add up or mix up together. The Bitcoin system is like a public account book, it writes:
