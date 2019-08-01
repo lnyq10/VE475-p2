@@ -117,7 +117,7 @@ The cost function is define as
 The set $\mathcal{S}$ is the set of strings. $D \in \mathbb{N}^*$ is the difficulty level of this problem and $x$ is called a nonce. $\mathcal{F}(s, D, x)$ returns true if and only if Hash($A|D|x$) starts with $D$ zeros. 
 
 
-In the case of bitcoin, the hash function SHA-256 is used. In practice, $s$ and $D$ is fixed, the process of proof of work is to find a nonce $x$ such that $\mathcal{F}(s, D, x)$ returns true. An example of proof of work is shown in Fig.~\ref{fig:hash}. In this process the nonce $x$ is chosen in the order of the natural numbers.
+In the case of bitcoin, the hash function SHA-256 is used. In practice, $s$ and $D$ is fixed, the process of proof of work is to find a nonce $x$ such that $\mathcal{F}(s, D, x)$ returns true. An  simplified example of proof of work is shown in Fig.~\ref{fig:hash}. In this process the nonce $x$ is chosen in the order of the natural numbers.
 
 \begin{figure}[tbph!]
 	\centering
@@ -138,6 +138,23 @@ The mining process is to solve the problem given by proof of work. At a given ti
 &s_5 = \text{target}
 \end{align*}
 A block is composed of a block header and a block body. The block header is defined as $s|x$. Once a suitable nonce $x$ is found, the miner is can publish this block and add it to the block chain.
+\subsubsection{Adjustment of Difficulties}
+Let $T$ be random variable that represents the time required to mine a new block. The bitcoin protocol specifies that 
+\begin{align*}
+E[T] = \tau_0 = 600 \quad [\text{seconds}]
+\end{align*}
+But the computational power of the miner may differ, so the difficulty level is adjusted once 2016 blocks are mined (two weeks) to make $E[T] = 600 $. The formula is given by 
+\begin{align*}
+\text{D}_{\text{new}} = \text{D}_{\text{old}} \cdot \frac{t}{2016\cdot \tau_0}
+\end{align*}
+$t$ is the time spent to mine the last 2016 blocks. 
+
+
+The random variable $T$ follows a exponential distribution 
+\begin{align*}
+f_T(x) &= \alpha e^{-\alpha x} \\
+\alpha & = \frac{1}{600} \quad [\text{seconds}^{-1}]
+\end{align*}
 \subsection{General Procedure of Mining}
 \begin{enumerate}
 	\item Alice gathers the transactions and put them in a block (a block can contain approximately 4,000 transactions)
@@ -150,7 +167,7 @@ A number of Byzantine Generals each has his own computer. They communicate throu
 
 
 In the set up of bicoin, the Byzantine Generals' Problem is solved by the mining process at the cost of computational power (electricity). With the hard "inverse hash" step in the proof of work, the bitcoin system guarantees that no malicious user can double spend their bitcoins of forge a transaction, as will be shown in the next section.
-\subsection{Double Spending and Forgery} 
+\subsection{Possible Attacks Prevented by the Mining Process} 
 Now Eve has ten bitcoins and she proposes transactions to both Bob and Alice to give them ten bitcoins each. In the meantime, there are two miners Charlie and Manuel.
 \begin{enumerate}
 	\item Eve announces a 10-bitcoin-transaction to  both Bob and Alice. (She only has 10 bitcoins left)
@@ -160,6 +177,14 @@ Now Eve has ten bitcoins and she proposes transactions to both Bob and Alice to 
 	\item Without lose of generality, let's assume Manuel beats Charlie and solve the proof of work problem. Manuel happily add this new block to block chain. 
 	\item Then Charlie would abandon his block. While gathering transactions for a new block, he would ignore Eve's transaction request because Eve's has already gave her remaining 10 bitcoins to Bob in the previous block mined by Manuel. 
 \end{enumerate}
+
+Eve failed to double spend her bitcoin. She now tries to forge bitcoin transactions to make her rich. The only way she can forge bitcoins is to alter previous transaction records. To do so, she would have to recalculate a block.
+\begin{enumerate}
+	\item In a block $B_i$, there is a transaction record that Eve paid 10 bitcoins to Bob
+	\item Eve discard this record. Then she need to solve the proof of work problem again for this block.
+	\item Eve solves this block. However since the block chain is a linked chain, she would have to recalculate all the subsequent blocks. 
+\end{enumerate}
+From the above discussion, we can see that Eve can only commit forgery if she has more computational powers than all the other honest parties in the mining pool, since we always take the longest chain to be the correct one.
 
 \section{Definition of Blockchain}\label{def}
 Blockchain, by definition, is a growing list of records that are linked using cryptography, these records are also called as blocks. The beginning of the blockchain, which is the first block in this blockchain, is called as genesis block, every new generated block is then linked to the last block in the chain. For different blockchain, it may have different block structure, and different way to link the blocks. In cryptocurrency bitcoin, a special blockchain serves as the public ledger for all transactions on the network. 
