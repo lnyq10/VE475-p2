@@ -50,14 +50,14 @@ ID: 516370910118\hspace*{2em}
 Name: Xiang Zhiyuan \hspace*{2em}&
 ID: 516370910118\hspace*{2em}
 \\
-Name: S \hspace*{2em}&
-ID: 516370910118\hspace*{2em}
+Name: Zhu Hanqi \hspace*{2em}&
+ID: 515370910113\hspace*{2em}
+\\
+Name: Li Ruohan \hspace*{2em}&
+ID: 515370910083\hspace*{2em}
 \\
 
-
-\\
-
-Date: 26 July 2019
+\today
 \end{tabular}
 \end{table}
 
@@ -83,11 +83,11 @@ There are problems in this common trade scheme.
 
 \subsection{Creation of Bitcoins}
 
-In 2008, Satoshi Nakamoto published a paper "Bitcoin: A Peer-to-Peer Electronic Cash System", putting forward a kind of electronic cash system constructed on the basis of cryptography. Instread of traditional credit endorsement of countries and banks, Satoshi uses cryptography as the basis of cash system. Satoshi states that "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."[] In his design, people can trade with others with bitcoins peer to peer with no third parties, and the safety is still ensured. This is a cash system with no extra cost, perfect speed, anonymity and totally no threshold.  
+In 2008, Satoshi Nakamoto published a paper "Bitcoin: A Peer-to-Peer Electronic Cash System", putting forward a kind of electronic cash system constructed on the basis of cryptography. Instread of traditional credit endorsement of countries and banks, Satoshi uses cryptography as the basis of cash system. Satoshi states that "A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution."\cite{0} In his design, people can trade with others with bitcoins peer to peer with no third parties, and the safety is still ensured. This is a cash system with no extra cost, perfect speed, anonymity and totally no threshold.  
 
-Especially in the society with giant number of commerce on the Internet, financial institutes as third parties are essential to deal with electronic payments. This commerce model depends on trust and costs a number of transaction cost. Satoshi proposes "a solution to the double-spending problem using a peer-to-peer distributed timestamp server to generate computational proof of the chronological order of transactions."[] The system is computationally secure because only when the attacker node can control more CPU power than all the other users collectively worldwide. It is impossible in cryptography.
+Especially in the society with giant number of commerce on the Internet, financial institutes as third parties are essential to deal with electronic payments. This commerce model depends on trust and costs a number of transaction cost. Satoshi proposes "a solution to the double-spending problem using a peer-to-peer distributed timestamp server to generate computational proof of the chronological order of transactions."\cite{0} The system is computationally secure because only when the attacker node can control more CPU power than all the other users collectively worldwide. It is impossible in cryptography.
 
-The number of bitcoins is limited so as not to reduce their value. A user can mine bitcoins by running the program. The complexity is very high and the number of bitcoins mined in a period of time is certain. When user mine the solution, all the other users can get to know. It is hard to find, but easy to verify. The number of bitcoins remaining to be mined is reducing. In total, there are no more than 21 million bitcoins. []
+The number of bitcoins is limited so as not to reduce their value. A user can mine bitcoins by running the program. The complexity is very high and the number of bitcoins mined in a period of time is certain. When user mine the solution, all the other users can get to know. It is hard to find, but easy to verify. The number of bitcoins remaining to be mined is reducing. In total, there are no more than 21 million bitcoins. \cite{0}
 
 \section{Fundamentals in Cryptography}
 
@@ -134,6 +134,13 @@ There two important properties of digital signature: (1) the authenticity of a d
 \subsection{SHA-256 Signature}
 
 SHA is the simplified form of "Secure Hash Algorithm". SHA-2 is a set of cryptographic hash functions design with Merkle–Damgård structure. SHA-256 is one hash function in SHA-2. These functions share similar structure. SHA-256 computes with 32-bit words. It has great performance on security and efficiency.
+
+\subsection{RIPEMD160}
+ RIPEMD is the simplifiled form of "RIPE Message Digest", and it represents a set of cryptographic hash functions with Merkle–Damgård construction. RIPEMD160 is one reversed and strengthened version in this family, and it is commonly used for acedemy. It is designed for longer hash results with safety. RIPMED160 can produce 160-bit hash digest.
+ 
+ \subsection{Base58Check Encoding}
+ Instead of Base64, in bitcoin Base58 Encoding is adopted. The number 0, uppercase letters O,I, lower case letter i and special symbols $+$,$/$ are eliminated from the base. The reason why not taking the number ans letters is these may look extremely similar in some fonts, and Satoshi hopes to obtain visually identitical strings. This base also provides the possibility for double click in most applications. 
+
 \section{Transaction}
 \subsection{Overview}
 One important thing of which Bitcoin currency is very different from common cash is that, what you receive will not add up or mix up together. The Bitcoin system is like a public account book, it writes:
@@ -207,7 +214,7 @@ In the case of bitcoin, the hash function SHA-256 is used. In practice, $s$ and 
 \begin{figure}[tbph!]
 	\centering
 	\includegraphics[width=0.9\linewidth]{Hash}
-	\caption{Example of a proof of work (from bitwiki).}
+	\caption{Example of a proof of work. \cite{1}}
 	\label{fig:hash}
 \end{figure}
 
@@ -293,7 +300,7 @@ In this case, Merkle tree can be used to verify any kind of data stored, handled
 \begin{figure}[htbp!]
 	\centering
 	\includegraphics[width=0.7\linewidth]{hash_tree.png}
-	\caption{A Binary Merkle Tree}
+	\caption{A Binary Merkle Tree.\cite{4}}
 	\label{fig::diagram}
 \end{figure}
 
@@ -379,10 +386,40 @@ One of the hard problem faced by many cryptocurrencys is that, how could cryptoc
  
  In a conclusion, with the help of blockchain, bitcoin system could perfectly solve double spending problem.
 
-\section{References}
-\begin{enumerate}
-	\item The Mathematics Behind Bitcoin, Cyril Grunspan, \url{https://webusers.imj-prg.fr/~ricardo.perez-marco/blockchain/BitcoinP7.pdf}
-	\item \url{https://en.bitcoinwiki.org/wiki}
-	\item Bitcoins the hard way: Using the raw Bitcoin protocol, Ken Shirriff, \url{http://www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html}
-\end{enumerate}
+\begin{thebibliography}{1}
+\bibitem{0}
+\newblock Nakamoto, Satoshi.
+\newblock "Bitcoin: A peer-to-peer electronic cash system." (2008).
+
+\bibitem{1}
+\newblock Retrieved from \url{en.bitcoin.it/wiki/Main_Page}
+
+\bibitem{2}
+Grunspan, Cyril and Pérez-Marco, Ricardo.
+\newblock "Double spend races."
+\newblock {\em arXiv preprint arXiv:} 1702.02867.(2017)
+
+\bibitem{3}
+Shirriff, Ken.
+\newblock "Bitcoins the hard way: Using the raw Bitcoin protocol."
+\newblock \url{www.righto.com/2014/02/bitcoins-hard-way-using-raw-bitcoin.html} {\em Ken Shirriff's Blog} (2014).
+
+
+\bibitem{4}
+\newblock Retrieved from \url{https://en.wikipedia.org/wiki/Merkle_tree}
+
+\bibitem{5}
+\newblock Retrieved from \url{https://en.wikipedia.org/wiki/Bittorrent}
+
+\bibitem{6}
+\newblock Retrieved from \url{https://en.wikipedia.org/wiki/Digital_signature}
+
+\bibitem{7}
+\newblock Retrieved from \url{https://en.wikipedia.org/wiki/RIPEMD}
+
+\url{}
+\end{thebibliography}
+
+
+
 \end{document}
